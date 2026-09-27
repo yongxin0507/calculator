@@ -3,10 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" src="style.css">
+    <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
     <title>Calculator</title>
 </head>
-<body>
+<body style="background-color: black; display: flex; justify-content: center; min-height:100vh; align-items: center;">
+    <div class="container">
+        <div id="display"></div>
+        <div class="buttons">
+            <div class="left">
+                <div class="row">
+                    <button>7</button>
+                    <button>8</button>
+                    <button>9</button>
+                </div>
+                <div class="row">
+                    <button>4</button>
+                    <button>5</button>
+                    <button>6</button>
+                </div>
+                <div class="row">
+                    <button>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                </div>
+                <div class="row">
+                    <button class="yellowBox">CE</button>
+                    <button>0</button>
+                    <button class="yellowBox">=</button>
+                </div>
+            </div>
+            <div class="operators">
+                <button>+</button>
+                <button>-</button>
+                <button>x</button>
+                <button>/</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
