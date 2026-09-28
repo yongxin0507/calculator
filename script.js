@@ -3,7 +3,8 @@ const num = document.querySelectorAll(".number");
 const opt = document.querySelectorAll (".opt");
 const clear = document.querySelector(".clear");
 const backspace = document.querySelector(".backspace");
-const equals = document.querySelector(".equals")
+const equals = document.querySelector(".equals");
+const dot = document.querySelector(".dot");
 let cache = [];
 const tempOpt =[];
 let tempNum = Number(cache[1]);
@@ -17,27 +18,47 @@ function calc(){
         return Number(cache[0]) - Number(cache[2]);
     }else if(cache.includes("x")){
         return Number(cache[0]) * Number(cache[2]);
+    }else if(cache.includes("/") && Number(cache[2]) === 0){
+        return "ERROR";
     }else{
         return Number(cache[0]) / Number(cache[2]);
     }
 }
 
 function reset(){
-    cache.push(display.textContent);
     let result = calc();
     cache = [];
     cache.splice(0, 0, result);
+    if (result === "ERROR"){
+        display.textContent ="ERROR";
+        return;
+    }
+
+    result = parseFloat(result.toFixed(15));
     display.textContent = result;
 }
+
+function CEclear(){
+    display.textContent = "";
+    cache = [];
+    tempOpt.length = 0;
+}
+
 
 num.forEach(button => {
     button.addEventListener("click", ()=>{
         if (display.textContent === ""){
             display.textContent = button.textContent;
+        }else if (display.textContent === "0"){
+            return;
         }else if(["+","-","x", "/"].some((operator)=> tempOpt.includes(operator))){
             cache.push(tempOpt.at(-1));
             tempOpt.length = 0;
             display.textContent = button.textContent;
+        }else if(cache.length===1){
+            display.textContent = button.textContent;
+            cache = [];
+            tempOpt.length = 0
         }else{
             display.textContent += button.textContent;
         }
@@ -51,6 +72,7 @@ opt.forEach(button => {
         }else if(["+","-","x", "/"].some((operator)=> tempOpt.includes(operator)) ){
             tempOpt.push(button.textContent);
         }else if(cache.length==2){
+            cache.push(display.textContent);
             reset();
             tempOpt.push(button.textContent);
         }else{
@@ -61,25 +83,30 @@ opt.forEach(button => {
     })
 });
 
-clear.addEventListener("click", () =>{
-    display.textContent = "";
-    cache = [];
-    tempOpt.length = 0;
-})
+clear.addEventListener("click", CEclear)
 
 backspace.addEventListener("click", () =>{
     display.textContent = display.textContent.slice(0, -1);
 })
 
 equals.addEventListener("click", () =>{
-if (cache.length === 2){
-    cache.push(display.textContent);
-    tempO = cache[1];
-    tempNum = Number(cache[2]);
-    reset();
-}else if(cache.length === 1 && tempNum !== ""){
-    cache.push(tempO);
-    cache.push(tempNum);
-    reset();
-}
+    if (cache.length === 2){
+        cache.push(display.textContent);
+        tempO = cache[1];
+        tempNum = Number(cache[2]);
+        reset();
+    }else if(cache.length === 1 && tempNum !== ""){
+        cache.push(tempO);
+        cache.push(tempNum);
+        cache.push(display.textContent);
+        reset();
+    }
+})
+
+dot.addEventListener("click", ()=> {
+    if (display.textContent === "" || display.textContent.includes(".")){
+        return;
+    } else {
+        display.textContent += dot.textContent;
+    }
 })

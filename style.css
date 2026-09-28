@@ -7,6 +7,7 @@
     background-color: lightgray;
     flex-direction: column;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 #display{
@@ -27,14 +28,13 @@
 .buttons{
     display: flex;
     flex: 1;
+    gap: 10px;
 }
 
 .operators{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-left: 10px;
-    margin-right: 50px;
     flex: 1;
 }
 
@@ -42,7 +42,6 @@
     display: flex;
     flex-direction: column;
     flex: 3.5 1 0;
-    margin-left: 50px;
     gap: 10px;
 }
 
@@ -74,3 +73,10 @@ button{
 .yellowBox{
     background-color: darkgoldenrod;
 }
+
+.dotCE{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    gap: 10px;
+}  
