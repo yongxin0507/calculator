@@ -80,3 +80,13 @@ button{
     flex: 1 1 0;
     gap: 10px;
 }  
+
+.yellowBox,
+.backspace{
+    font-size: large;
+}
+
+.opt,
+.number{
+    font-size: xx-large;
+}

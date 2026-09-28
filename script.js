@@ -59,6 +59,8 @@ num.forEach(button => {
             display.textContent = button.textContent;
             cache = [];
             tempOpt.length = 0
+        }else if(display.textContent.length === 18){
+            return;
         }else{
             display.textContent += button.textContent;
         }
@@ -109,4 +111,36 @@ dot.addEventListener("click", ()=> {
     } else {
         display.textContent += dot.textContent;
     }
+})
+
+document.addEventListener("keydown", event =>{
+    let key=event.key;
+    if (key === "*"){
+        key = "x";
+    }
+
+    const button = [...num, ...opt].find(
+        button => button.textContent ===key
+    )
+
+    if(button){
+        button.click();
+        return;
+    }
+
+    if(key === "Enter" || key === "="){
+        equals.click();
+        return;
+    }
+
+    if(key === "Backspace"){
+        backspace.click();
+        return;
+    }
+
+    if(key === "Escape"){
+        clear.click();
+        return;
+    }
+
 })
